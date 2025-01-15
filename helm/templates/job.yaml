@@ -1,0 +1,49 @@
+{{- $top := . -}}
+{{- range $user := .Values.users -}}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ $top.Release.Name }}-{{ $user.username }}
+spec:
+  template:
+    spec:
+      containers:
+      - name: {{ $top.Release.Name }}-{{ $user.username }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+        - name: USER_FULL_NAME
+          value: {{ $user.fullName }}
+        - name: EMAIL
+          value: {{ $user.email }}
+        - name: USERNAME
+          value: {{ $user.username }}
+        - name: ROLE
+          value: {{ $user.role }}
+        - name: ORG_ID
+          value: {{ $user.orgId }}
+        - name: USER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: user-secret
+              key: userInitPassword
+        - name: GRAFANA_URL
+          valueFrom:
+            configMapKeyRef:
+              name: grafana-config
+              key: grafanaUrl
+        - name: ADMIN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: grafana-admin-secret
+              key: username
+        - name: ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: grafana-admin-secret
+              key: password
+        command: ["/create-user.sh"]
+      restartPolicy: Never
+...
+{{ end }}

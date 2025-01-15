@@ -1,0 +1,23 @@
+image:
+  repository: "eitanas1/create-user"
+  pullPolicy: "IfNotPresent"
+  tag: "latest"
+
+users:
+  - fullName: "Viewer Gabi"
+    email: "gabi@gmail.com"
+    username: "viewer-gabi"
+    role: "Viewer"
+    orgId: "1"
+  - fullName: "Editor Danney"
+    email: "danney@gmail.com"
+    username: "editor-danney"
+    role: "Editor"
+    orgId: "1"
+  - fullName: "Admin Daniel"
+    email: "daniel@gmail.com"
+    username: "admin-daniel"
+    role: "Admin"
+    orgId: "1"
+    
+    

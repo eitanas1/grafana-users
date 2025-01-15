@@ -1,0 +1,18 @@
+# Ignore the Helm chart's dependency directories
+helm/charts/
+# Ignore package files
+*.tgz
+# Ignore Helm release history files
+helm/release-history.yaml
+# Ignore local environment files (like local secrets, etc.)
+*.env
+# Ignore any Kubernetes secrets or configurations that are local to your machine
+*.kubeconfig
+# Ignore IDE/editor-specific files
+.idea/
+.vscode/
+*.swp
+# Ignore Helm lint output
+helm/helm-lint-output/
+# Ignore temporary build files
+.DS_Store
