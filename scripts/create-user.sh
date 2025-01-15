@@ -13,4 +13,4 @@ echo $response
 # assign the user to a role
 user_id=$(echo $response | jq .id)
 curl -X PUT -H "Content-Type: application/json" -d '{"role":"'$ROLE'"}
-  }' http://$ADMIN_USERNAME:$ADMIN_PASSWORD@$GRAFANA_URL/api/orgs/$org_id/users/$user_id
+  }' http://$ADMIN_USERNAME:$ADMIN_PASSWORD@$GRAFANA_URL/api/orgs/$ORG_ID/users/$user_id
